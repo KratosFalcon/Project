@@ -5,7 +5,7 @@ import random
 import string
 
 '''
-PROJECT FOR TERM 1 | AIRPLANCE PASSANGER MANAGEMENT SYSTEM IN CSV
+PROJECT FOR TERM 1 | AIRPLANE PASSANGER MANAGEMENT SYSTEM IN CSV
 '''
 
 
@@ -22,6 +22,7 @@ def planes():
         l = [Plane,From,To]
         w.writerow(l)
     f.close()
+#planes()
 
 #INFO PLANES
 def readplanes():
@@ -46,7 +47,44 @@ def main():
     for i in w:
         if i[1]==m and i[2]==n:
 
-            print(f"****FLIGHTS ARE AVAILABLE FROM:{m}|TO:{n}|ON:{q}")
+            #OTP GENERATOR
+            def otp():
+                m = string.digits
+                g= list(m)
+                cptcha = random.choices(g,k=6)
+                s = ''.join(str(x) for x in cptcha)
+                print("*********************")
+                print("OTP IN YOUR EMAIL: ",s)
+                print("*********************")
+                print()
+                p = input("Enter otp:")
+                if p == s:
+                    print("tick!!")
+                    print()
+                    pass
+                else:
+                    print("WRONG OTP !")
+                    otp()
+
+            #LOG IN 
+            print()
+            print("***************************************")
+            print("WELCOME TO AIRPLANE GO PLS LOG IN")
+            print()
+            def login():
+                r = input("Enter email id: ")
+                c = input("Create a password: ")
+                d = input("Reenter password: ")
+                if c == d:
+                    otp()
+                else:
+                    print("wrong password enter carefully!")
+                    print()
+                    login()
+
+            login()
+
+            print(f"****FLIGHTS ARE AVAILABLE FROM:{m}|TO:{n}|ON:{q}****")
             print("****Input your credentials****")
             
             def detailsde():
@@ -60,6 +98,11 @@ def main():
                 newlist1 = [Name,Age,Gender,Meal]
                 w.writerow(newlist1)
                 gocsv.close()
+                mor = input("Do you want to book another ticket(y/n): ")
+                if mor in "yY":
+                    detailsde()
+                else: 
+                    pass
             detailsde()
             
 
@@ -101,7 +144,7 @@ def main():
                         print("New Data:",row)
                     file.close()
 
-            #AGE CHANGE FUCTION
+            #AGE CHANGE FUNCTION
             def ageupdater():
                 file = open('details.csv','r')
                 reader = csv.reader(file)
@@ -111,7 +154,7 @@ def main():
                 for row in reader:
                     if row[0]==uname:
                         Found = True
-                        age = input("Enter age to be updaated: ")
+                        age = input("Enter age to be updated: ")
                         row[1]=age
                     l.append(row)
                 file.close()
@@ -137,7 +180,7 @@ def main():
                 for row in reader:
                     if row[0]==uname:
                         Found = True
-                        genderz = input("Enter gender to be updaated: ")
+                        genderz = input("Enter gender to be updated: ")
                         row[2]=genderz
                     l.append(row)
                 file.close()
@@ -163,7 +206,7 @@ def main():
                 for row in reader:
                     if row[0]==uname:
                         Found = True
-                        mealz = input("Enter gender to be updaated: ")
+                        mealz = input("Enter meal to be updated: ")
                         row[3]=mealz
                     l.append(row)
                 file.close()
@@ -186,7 +229,8 @@ def main():
             chois=input("Anything to change(y/n): ")
 
             #DETAIL CHANGE MENU
-            if chois in "yY":
+            chois = "y"
+            while chois in "yY":
                 print("****HERE IS THE DETAIL CHANGE MENU****")
                 print("(1)Name\n(2)Age\n(3)Gender\n(4)Meal\n(5)Continue with next step")
                 ger = int(input("Enter your choice: "))
@@ -200,8 +244,7 @@ def main():
                     mealupdater()
                 elif ger ==5:
                     pass
-            else:
-                pass
+                chois = input("Update anymore details(y/n): ")
 
             
             #TICKET SEARCH
@@ -214,6 +257,9 @@ def main():
                     if i[0]==n:
                         print(i,end="")
                         f = f+1
+                if f==0:
+                    print("Wrong name entered!")
+                    ser()      
                     
                 rd.close()
                 cfa = input("\ndo you want to view your ticket again (y/n): ")
@@ -313,10 +359,10 @@ def main():
                         print("!!FLIGHT SEATS ARE BOOKED SUCCESSFULLY!!")
         
                     else:
-                        print("Kindly Cancel your ticket to remove filled crendentials!")
+                        print("Kindly Cancel your ticket to remove filled credentials!")
 
                 if dhh == 3:
-                    gr = input("Enter naame on card: ")
+                    gr = input("Enter name on card: ")
                     nu = int(input("Enter card number: "))
                     dr = int(input("Enter expiry: "))
                     dat = int(input("Enter cvv: "))
@@ -337,7 +383,7 @@ def main():
                         print("!!FLIGHT SEATS ARE BOOKED SUCCESSFULLY!!")
         
                     else:
-                        print("Kindly Cancel your ticket to remove filled crendentials!")
+                        print("Kindly Cancel your ticket to remove filled credentials!")
 
             print()
             print("*****************************************")
@@ -376,8 +422,15 @@ def main():
                 fg = input("Cancel ticket (y/n): ")
                 if fg in "yY":
                     ticketdelete()
+
                 else:
-                    pass
+                    print()
+                    print("**********************")
+                    print("ThankYou For Booking Airplanes Tickets With Us!")
+                    print("**********************")
+                    print()
+                    break
+                    
             ticketcanceloption()
             
 
@@ -385,54 +438,4 @@ def main():
         print("No flights available for this path")
 
 main()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
